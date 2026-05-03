@@ -234,5 +234,32 @@ POST /auth/register
   "password": "Password123"
 }
 ```
-
 ![Регистрация пользователя](screen/1.png)
+![Регистрация пользователя](screen/1_reg.png)
+
+
+
+## 2. Логин и получение JWT
+
+Эндпоинт:
+
+```text
+POST /auth/token
+```
+
+В Swagger используется форма OAuth2. Нужно заполнить:
+
+```text
+username: student_surname@email.com
+password: Password123
+```
+
+Пример успешного ответа:
+
+```json
+{
+  "access_token": "jwt_access_token",
+  "token_type": "bearer"
+}
+```
+![Регистрация пользователя](screen/token.png)
