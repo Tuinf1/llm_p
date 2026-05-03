@@ -234,3 +234,5 @@ POST /auth/register
   "password": "Password123"
 }
 ```
+
+![Регистрация пользователя](screen/1.png)
