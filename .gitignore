@@ -1,0 +1,19 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+llm_p/.env
+# Virtual environments
+.venv
+.vscode
+1
+.python-version
+uv.lock/
+*.vscode/
+*.ruff_cache/
+llm_p/__pycache__/
+.env
+app.db
