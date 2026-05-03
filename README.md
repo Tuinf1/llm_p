@@ -235,7 +235,7 @@ POST /auth/register
 }
 ```
 ![Регистрация пользователя](screen/1.png)
-![Регистрация пользователя](screen/1_reg.png)
+
 
 
 
@@ -261,5 +261,16 @@ password: Password123
   "access_token": "jwt_access_token",
   "token_type": "bearer"
 }
+```
+![Регистрация пользователя](screen/1_reg.png)
+
+
+## 3. Авторизация через Swagger
+
+В Swagger токен заполняется автоматически после введения логина и пароля **Authorize** вводить отдельно токен не нужно:
+
+```text
+username: student_surname@email.com
+password: Password123
 ```
 ![Регистрация пользователя](screen/token.png)
