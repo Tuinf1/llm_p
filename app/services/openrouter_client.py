@@ -2,10 +2,10 @@
 import httpx
 from typing import List, Dict
 from llm_p.app.core.errors import ExternalServiceError
-from llm_p.app.core.config import settings  # Импортируем настройки здесь
-
+from llm_p.app.core.config import settings  # Импортируем настройки
 
 class OpenRouterClient:
+
     """Клиент для взаимодействия с API OpenRouter."""
     
     def __init__(self):
@@ -39,6 +39,7 @@ class OpenRouterClient:
         try:
             timeout = settings.OPENROUTER_TIMEOUT or 30.0
             async with httpx.AsyncClient(timeout=timeout) as client:
+                
                 response = await client.post(
                     url,
                     headers=headers,
@@ -46,13 +47,30 @@ class OpenRouterClient:
                 )
                 
                 if response.status_code >= 400:
+
                     raise ExternalServiceError(
                         f"OpenRouter API error: {response.status_code} - {response.text}"
                     )
                 
                 # Возвращаем только текст ответа
-                return response.json()["choices"][0]["message"]["content"]
-                
+                # return response.json()["choices"][0]["message"]["content"]
+                data = response.json()
+                content = data["choices"][0]["message"]["content"]
+
+                # если это строка → просто вернуть
+                if isinstance(content, str):
+                    return content
+
+                # если это список блоков → собрать текст
+                if isinstance(content, list):
+                    texts = []
+                    for item in content:
+                        if item.get("type") == "text":
+                            texts.append(item.get("text", ""))
+                    return "\n".join(texts)
+
+                # fallback
+                return str(content)
         except httpx.RequestError as e:
             raise ExternalServiceError(f"Request to OpenRouter failed: {str(e)}")
         except KeyError as e:
