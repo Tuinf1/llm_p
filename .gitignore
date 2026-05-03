@@ -17,3 +17,4 @@ uv.lock/
 llm_p/__pycache__/
 .env
 app.db
+.gitignore
